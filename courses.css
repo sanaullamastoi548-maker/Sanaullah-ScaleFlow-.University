@@ -1,7 +1,20 @@
-/*
-========================================
-ScaleFlow University
-Courses Module CSS
-Version 1.0
-========================================
-*/
+/* ==========================================
+Courses Module
+Part 1A
+========================================== */
+
+.courses-module{
+    width:100%;
+    padding:25px;
+}
+
+#courseSearchArea,
+#courseFilterArea,
+#featuredCoursesArea,
+#recommendedCoursesArea,
+#allCoursesArea,
+#paginationArea{
+
+    margin-bottom:30px;
+
+}
