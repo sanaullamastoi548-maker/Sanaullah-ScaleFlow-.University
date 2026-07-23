@@ -232,29 +232,30 @@ courseDatabase.push(
 
 log("Course Database Loaded : " + courseDatabase.length + " Courses");
 
+
 /*============================================================
-Part 3 — Course Card Template & Render Functions
+Part 3 — Course Card Template & Render Functions (Fixed Yellow Theme)
 ============================================================*/
 
 function createCourseCard(course){
 return `
-<div class="course-card" data-id="${course.id}" data-category="${course.category}" data-difficulty="${course.difficulty}">
-    <div class="course-image">
-        <img src="${course.image}" alt="${course.title}" onerror="this.src='https://via.placeholder.com/400x200?text=ScaleFlow+Course'">
+<div class="course-card" data-id="${course.id}" data-category="${course.category}" data-difficulty="${course.difficulty}" style="background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+    <div class="course-image" style="border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
+        <img src="${course.image}" alt="${course.title}" onerror="this.src='https://via.placeholder.com/400x200?text=ScaleFlow+Course'" style="width:100%; height:140px; object-fit:cover;">
     </div>
     <div class="course-content">
-        <span class="course-category">${course.category}</span>
-        <h3 class="course-title">${course.title}</h3>
-        <p class="course-instructor">👨‍🏫 ${course.instructor}</p>
-        <div class="course-meta">
+        <span class="course-category" style="background: #fff8e1; color: #f57f17; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">${course.category}</span>
+        <h3 class="course-title" style="font-size: 18px; margin: 10px 0 6px; color: #333;">${course.title}</h3>
+        <p class="course-instructor" style="color: #666; font-size: 14px; margin-bottom: 10px;">👨‍🏫 ${course.instructor}</p>
+        <div class="course-meta" style="display: flex; justify-content: space-between; font-size: 13px; color: #777; margin-bottom: 10px;">
             <span>📚 ${course.lessons} Lessons</span>
             <span>⏱ ${course.duration}</span>
         </div>
-        <div class="course-footer">
-            <span class="course-rating">⭐ ${course.rating}</span>
-            <span class="course-price">${course.price}</span>
+        <div class="course-footer" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 600;">
+            <span class="course-rating" style="color: #fbc02d;">⭐ ${course.rating}</span>
+            <span class="course-price" style="color: #2e7d32;">${course.price}</span>
         </div>
-        <button class="btn-primary course-start" data-course="${course.id}" style="width:100%; margin-top:15px; padding:10px; background:#2E7D32; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+        <button class="btn-primary course-start" data-course="${course.id}" type="button" style="width:100%; margin-top:10px; padding:10px; background:#ffc107; color:#000; border:none; border-radius:8px; cursor:pointer; font-weight:700; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
             Start Learning
         </button>
     </div>
@@ -262,6 +263,7 @@ return `
 `;
 }
 
+    
 function renderFeaturedCourses(){
     if(!featuredArea) return;
     const featured = courseDatabase.filter(c => c.featured === true);
