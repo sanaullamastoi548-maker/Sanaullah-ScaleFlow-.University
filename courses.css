@@ -122,52 +122,40 @@ Status : LOCK AFTER TEST
 =========================== */
 
 @media(max-width:992px){
-
     #coursesPage{
         padding:20px;
     }
-
     .courses-header{
         flex-direction:column;
         align-items:flex-start;
     }
-
     .course-search{
         max-width:100%;
     }
-
 }
 
 @media(max-width:768px){
-
     .courses-title h2{
         font-size:26px;
     }
-
     .course-section-title{
         font-size:20px;
     }
-
     .filter-btn{
         width:100%;
     }
-
 }
 
 @media(max-width:480px){
-
     #coursesPage{
         padding:15px;
     }
-
     .courses-title h2{
         font-size:22px;
     }
-
     .courses-title p{
         font-size:14px;
     }
-
 }
 
 /*==================================================
@@ -211,113 +199,68 @@ COURSE CARD
 ==================================================*/
 
 .course-card{
-
     background:#ffffff;
-
     border-radius:18px;
-
     overflow:hidden;
-
     box-shadow:0 10px 25px rgba(0,0,0,.08);
-
     transition:.35s;
-
     cursor:pointer;
-
     display:flex;
-
     flex-direction:column;
-
+    animation:fadeUp .5s ease;
 }
 
 .course-card:hover{
-
     transform:translateY(-8px);
-
     box-shadow:0 18px 45px rgba(0,0,0,.18);
-
 }
 
 .course-image{
-
     width:100%;
-
     height:190px;
-
     overflow:hidden;
-
     background:#f5f5f5;
-
 }
 
 .course-image img{
-
     width:100%;
-
     height:100%;
-
     object-fit:cover;
-
     transition:.4s;
-
 }
 
 .course-card:hover .course-image img{
-
     transform:scale(1.08);
-
 }
 
 .course-content{
-
     padding:22px;
-
 }
 
 .course-category{
-
     display:inline-block;
-
     padding:5px 14px;
-
     border-radius:30px;
-
     background:#e8f5e9;
-
     color:#2e7d32;
-
     font-size:12px;
-
     font-weight:700;
-
     margin-bottom:12px;
-
 }
 
 .course-title{
-
     font-size:22px;
-
     font-weight:700;
-
     color:#222;
-
     margin-bottom:12px;
-
     line-height:1.4;
-
 }
 
 .course-description{
-
     color:#666;
-
     font-size:15px;
-
     line-height:1.7;
-
     margin-bottom:18px;
-
 }
 
 /*==================================================
@@ -325,57 +268,35 @@ COURSE INFO
 ==================================================*/
 
 .course-meta{
-
     display:flex;
-
     justify-content:space-between;
-
     flex-wrap:wrap;
-
     gap:12px;
-
     margin-bottom:18px;
-
     color:#666;
-
     font-size:14px;
-
 }
 
 .course-meta span{
-
     display:flex;
-
     align-items:center;
-
     gap:6px;
-
 }
 
 .course-rating{
-
     display:flex;
-
     align-items:center;
-
     gap:6px;
-
     margin-bottom:16px;
-
 }
 
 .course-rating i{
-
     color:#FFC107;
-
 }
 
 .course-rating span{
-
     font-weight:600;
-
     color:#555;
-
 }
 
 /*==================================================
@@ -383,37 +304,23 @@ PRICE
 ==================================================*/
 
 .course-price{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-top:18px;
-
 }
 
 .price{
-
     font-size:26px;
-
     font-weight:800;
-
     color:#2e7d32;
-
 }
 
 .old-price{
-
     color:#999;
-
     text-decoration:line-through;
-
     margin-left:8px;
-
     font-size:15px;
-
 }
 
 /*==================================================
@@ -421,25 +328,17 @@ BUTTONS
 ==================================================*/
 
 .course-actions{
-
     display:flex;
-
     gap:12px;
-
     margin-top:18px;
-
 }
 
 .course-btn{
-
     flex:1;
-
 }
 
 .course-btn button{
-
     width:100%;
-
 }
 
 /*==================================================
@@ -447,47 +346,29 @@ DIFFICULTY BADGES
 ==================================================*/
 
 .course-difficulty{
-
     display:inline-flex;
-
     align-items:center;
-
     gap:6px;
-
     padding:6px 14px;
-
     border-radius:30px;
-
     font-size:12px;
-
     font-weight:700;
-
     margin-bottom:12px;
-
 }
 
 .course-difficulty.beginner{
-
     background:#E8F5E9;
-
     color:#2E7D32;
-
 }
 
 .course-difficulty.intermediate{
-
     background:#FFF8E1;
-
     color:#F57C00;
-
 }
 
 .course-difficulty.advanced{
-
     background:#FFEBEE;
-
     color:#C62828;
-
 }
 
 /*==================================================
@@ -495,51 +376,32 @@ INSTRUCTOR
 ==================================================*/
 
 .course-instructor{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     margin-top:18px;
-
 }
 
 .course-instructor img{
-
     width:48px;
-
     height:48px;
-
     border-radius:50%;
-
     object-fit:cover;
-
 }
 
 .course-instructor-info{
-
     flex:1;
-
 }
 
 .course-instructor-name{
-
     font-size:15px;
-
     font-weight:700;
-
     color:#222;
-
 }
 
 .course-instructor-role{
-
     font-size:13px;
-
     color:#777;
-
 }
 
 /*==================================================
@@ -547,49 +409,30 @@ COURSE PROGRESS
 ==================================================*/
 
 .course-progress{
-
     margin-top:18px;
-
 }
 
 .course-progress-header{
-
     display:flex;
-
     justify-content:space-between;
-
     font-size:13px;
-
     margin-bottom:8px;
-
     color:#666;
-
 }
 
 .course-progress-bar{
-
     width:100%;
-
     height:10px;
-
     background:#ECECEC;
-
     border-radius:20px;
-
     overflow:hidden;
-
 }
 
 .course-progress-fill{
-
     height:100%;
-
     background:linear-gradient(90deg,#00C853,#43A047);
-
     border-radius:20px;
-
     transition:.4s;
-
 }
 
 /*==================================================
@@ -597,51 +440,32 @@ STATUS
 ==================================================*/
 
 .course-status{
-
     margin-top:18px;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
 }
 
 .status-label{
-
     padding:6px 12px;
-
     border-radius:25px;
-
     font-size:12px;
-
     font-weight:700;
-
 }
 
 .status-open{
-
     background:#E8F5E9;
-
     color:#2E7D32;
-
 }
 
 .status-coming{
-
     background:#FFF3E0;
-
     color:#EF6C00;
-
 }
 
 .status-closed{
-
     background:#FFEBEE;
-
     color:#D32F2F;
-
 }
 
 /*==================================================
@@ -649,267 +473,133 @@ COURSE FOOTER
 ==================================================*/
 
 .course-footer{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-top:22px;
-
     padding-top:18px;
-
     border-top:1px solid #EEEEEE;
-
 }
 
 .course-students{
-
     font-size:14px;
-
     color:#666;
-
 }
 
 .course-students strong{
-
     color:#222;
-
 }
 
 /*==================================================
-RESPONSIVE
-==================================================*/
-
-@media(max-width:992px){
-
-    .course-list{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-}
-
-@media(max-width:768px){
-
-    .course-list{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .course-title{
-
-        font-size:20px;
-
-    }
-
-    .course-image{
-
-        height:180px;
-
-    }
-
-    .course-footer{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:
-
-       /*==================================================
-SEARCH BAR
+SEARCH BAR & FILTERS (Extended)
 ==================================================*/
 
 .course-search{
-
     width:100%;
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     margin:30px 0;
-
 }
 
 .course-search input{
-
     flex:1;
-
     height:52px;
-
     border:1px solid #DADADA;
-
     border-radius:12px;
-
     padding:0 18px;
-
     font-size:15px;
-
     outline:none;
-
     transition:.3s;
-
     background:#FFFFFF;
-
 }
 
 .course-search input:focus{
-
     border-color:#2E7D32;
-
     box-shadow:0 0 0 3px rgba(46,125,50,.12);
-
 }
 
-/*==================================================
-FILTER BUTTONS
-==================================================*/
-
 .course-filters{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:12px;
-
     margin-bottom:35px;
-
 }
 
 .course-filter{
-
     padding:10px 18px;
-
     border-radius:30px;
-
     border:1px solid #DDDDDD;
-
     background:#FFFFFF;
-
     cursor:pointer;
-
     transition:.3s;
-
     font-size:14px;
-
     font-weight:600;
-
 }
 
 .course-filter:hover{
-
     background:#F5F5F5;
-
 }
 
 .course-filter.active{
-
     background:#2E7D32;
-
     color:#FFFFFF;
-
     border-color:#2E7D32;
-
 }
 
 /*==================================================
-EMPTY STATE
+EMPTY STATE & SKELETON
 ==================================================*/
 
 .course-empty{
-
     display:none;
-
     text-align:center;
-
     padding:80px 20px;
-
 }
 
 .course-empty img{
-
     width:160px;
-
     margin-bottom:20px;
-
 }
 
 .course-empty h3{
-
     font-size:24px;
-
     margin-bottom:10px;
-
     color:#333;
-
 }
 
 .course-empty p{
-
     color:#777;
-
     font-size:15px;
-
 }
 
-/*==================================================
-LOADING SKELETON
-==================================================*/
-
 .course-skeleton{
-
     background:#EEEEEE;
-
     border-radius:16px;
-
     overflow:hidden;
-
     animation:pulse 1.4s infinite;
-
 }
 
 .course-skeleton-image{
-
     height:200px;
-
     background:#DDDDDD;
-
 }
 
 .course-skeleton-line{
-
     height:14px;
-
     background:#DDDDDD;
-
     border-radius:8px;
-
     margin:14px 20px;
-
 }
 
 .course-skeleton-line.short{
-
     width:45%;
-
 }
 
 @keyframes pulse{
-
     0%{opacity:.55;}
-
     50%{opacity:1;}
-
     100%{opacity:.55;}
-
 }
 
 /*==================================================
@@ -917,81 +607,46 @@ PAGINATION
 ==================================================*/
 
 .course-pagination{
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:10px;
-
     margin:45px 0;
-
 }
 
 .course-pagination button{
-
     width:42px;
-
     height:42px;
-
     border:none;
-
     border-radius:10px;
-
     cursor:pointer;
-
     background:#F3F3F3;
-
     transition:.3s;
-
     font-weight:600;
-
 }
 
 .course-pagination button:hover{
-
     background:#E0E0E0;
-
 }
 
 .course-pagination button.active{
-
     background:#2E7D32;
-
     color:#FFFFFF;
-
 }
 
 /*==================================================
 ANIMATIONS
 ==================================================*/
 
-.course-card{
-
-    animation:fadeUp .5s ease;
-
-}
-
 @keyframes fadeUp{
-
     from{
-
         opacity:0;
-
         transform:translateY(20px);
-
     }
-
     to{
-
         opacity:1;
-
         transform:translateY(0);
-
     }
-
 }
 
 /*==================================================
