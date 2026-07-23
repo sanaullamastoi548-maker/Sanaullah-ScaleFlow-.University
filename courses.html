@@ -1,61 +1,106 @@
-<!-- ==========================================================
-COURSES MODULE
-Part 1A
-========================================================== -->
+<!-- ============================================================
+   ScaleFlow University — Courses Page (courses.html)
+   ============================================================ -->
 
-<section id="courses-module" class="courses-module">
+<div class="courses-container" id="coursesPageContent">
+    
+    <div class="courses-header mb-4">
+        <h2>📚 All Courses</h2>
+        <div class="search-box mt-3">
+            <input type="text" id="courseSearchInput" class="form-control" placeholder="Search courses...">
+        </div>
+        
+        <!-- Category Filter Buttons -->
+        <div class="category-filters mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="beginner">Beginner</button>
+            <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+            <button class="filter-btn" data-filter="advanced">Advanced</button>
+        </div>
+    </div>
 
-    <!-- Search -->
-    <div id="courseSearchArea"></div>
+    <!-- Main Courses Grid -->
+    <div class="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 25px;">
+        
+        <div class="course-card" data-category="beginner">
+            <h3>AI Fundamentals</h3>
+            <p>Beginner • 12 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
 
-    <!-- Filters -->
-    <div id="courseFilterArea"></div>
+        <div class="course-card" data-category="intermediate">
+            <h3>JavaScript Masterclass</h3>
+            <p>Intermediate • 20 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
 
-    <!-- Featured Courses -->
-    <div id="featuredCoursesArea"></div>
+        <div class="course-card" data-category="advanced">
+            <h3>Data Science Pro</h3>
+            <p>Advanced • 15 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
 
-    <!-- Recommended Courses -->
-    <div id="recommendedCoursesArea"></div>
+        <div class="course-card" data-category="beginner">
+            <h3>HTML & CSS</h3>
+            <p>Beginner • 8 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
 
-    <!-- All Courses -->
-    <div id="allCoursesArea"></div>
+        <div class="course-card" data-category="intermediate">
+            <h3>React Development</h3>
+            <p>Intermediate • 18 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
+
+        <div class="course-card" data-category="advanced">
+            <h3>Machine Learning</h3>
+            <p>Advanced • 22 Lessons</p>
+            <button class="btn-primary w-full">Start</button>
+        </div>
+
+    </div>
 
     <!-- Pagination -->
-    <div id="paginationArea"></div>
+    <div class="pagination-bar" style="display: flex; justify-content: center; gap: 5px; margin-bottom: 25px;">
+        <button class="btn-sm">Previous</button>
+        <button class="btn-sm active">1</button>
+        <button class="btn-sm">2</button>
+        <button class="btn-sm">3</button>
+        <button class="btn-sm">Next</button>
+    </div>
 
-</section>
+    <!-- Featured Courses -->
+    <div class="featured-section mb-4">
+        <h3 style="margin-bottom: 15px;">⭐ Featured Courses</h3>
+        <div class="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+            <div class="course-card">
+                <h3>AI for Everyone</h3>
+                <p>Featured • 10 Lessons</p>
+                <button class="btn-primary w-full">Enroll</button>
+            </div>
+            <div class="course-card">
+                <h3>Web Dev Bootcamp</h3>
+                <p>Featured • 30 Lessons</p>
+                <button class="btn-primary w-full">Enroll</button>
+            </div>
+        </div>
+    </div>
 
-<div class="course-search-box">
-
-    <input
-        type="text"
-        id="courseSearchInput"
-        placeholder="Search Courses...">
-
-    <button
-        id="courseSearchBtn"
-        class="btn-primary">
-        Search
-    </button>
-
-</div>
-
-<div class="course-filter-box">
-
-    <button class="course-filter active" data-filter="all">
-        All
-    </button>
-
-    <button class="course-filter" data-filter="beginner">
-        Beginner
-    </button>
-
-    <button class="course-filter" data-filter="intermediate">
-        Intermediate
-    </button>
-
-    <button class="course-filter" data-filter="advanced">
-        Advanced
-    </button>
+    <!-- Recommended for You -->
+    <div class="recommended-section">
+        <h3 style="margin-bottom: 15px;">📌 Recommended for You</h3>
+        <div class="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+            <div class="course-card">
+                <h3>Python for Data Science</h3>
+                <p>Recommended • 14 Lessons</p>
+                <button class="btn-primary w-full">Start</button>
+            </div>
+            <div class="course-card">
+                <h3>Cloud Computing</h3>
+                <p>Recommended • 12 Lessons</p>
+                <button class="btn-primary w-full">Start</button>
+            </div>
+        </div>
+    </div>
 
 </div>
