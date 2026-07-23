@@ -268,52 +268,21 @@ PAGE 2: DASHBOARD
 </section>
 
 
-<!-- ===================================================
-PAGE 3: COURSES
-=================================================== -->
-<section id="page3" class="page-section" aria-label="All Courses">
-    <h2>📚 All Courses</h2>
-    
-        <!-- Search Area with Button -->
-    <div class="learning-header" style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <input id="courseSearchInput" type="text" placeholder="🔍 Search any course (e.g. JavaScript, Python, Automation)..." aria-label="Search courses" style="flex: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px;">
-        <button id="courseSearchBtn" class="btn-primary" type="button" style="padding: 0 20px; background: #ffc107; color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Search</button>
+
+<!-- =====================================================
+PAGE 3 : COURSES
+===================================================== -->
+
+<section id="page3" class="page-section">
+
+    <div id="coursesContainer">
+
+        <!-- courses.html یہاں Load ہوگا -->
+
     </div>
 
-
-    <div class="filter-buttons course-filter-area">
-        <button class="course-filter btn-secondary active" data-filter="all" type="button">All</button>
-        <button class="course-filter btn-secondary" data-filter="programming" type="button">Programming</button>
-        <button class="course-filter btn-secondary" data-filter="business" type="button">Business</button>
-        <button class="course-filter btn-secondary" data-filter="automation" type="button">Automation</button>
-        <button class="course-filter btn-secondary" data-filter="ai" type="button">AI</button>
-    </div>
-
-    <section class="featured-courses" aria-label="Featured Courses">
-        <h3>⭐ Featured Courses</h3>
-        <div id="featuredCoursesGrid" class="course-grid"></div>
-    </section>
-
-    <section class="recommended-courses" aria-label="Recommended Courses">
-        <h3>📌 Recommended for You</h3>
-        <div id="recommendedCoursesGrid" class="course-grid"></div>
-    </section>
-
-    <section class="all-courses-section" aria-label="All Available Courses" style="margin-top: 30px;">
-        <h3>📚 All Available Courses</h3>
-        <div id="allCoursesGrid" class="course-grid"></div>
-    </section>
-
-    <div id="noCoursesFound" class="no-courses" style="display:none; text-align:center; padding:20px;">
-        <h3>📭 No Courses Found</h3>
-        <p>Try another keyword or category.</p>
-    </div>
-
-    <div id="coursesPagination" class="pagination" style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;"></div>
-
-    <div id="courseToastArea"></div>
 </section>
-
+            
 
 <!-- ===================================================
 PAGE 4: LEARNING
