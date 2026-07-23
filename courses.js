@@ -1,6 +1,1 @@
-/* ==========================================
-Courses Module
-Part 1A
-========================================== */
-
-console.log("✅ Courses Module Part 1A Loaded");
+console.log("✅ Courses Module Part 1B Loaded");
