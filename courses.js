@@ -667,3 +667,204 @@ document.addEventListener(
     }
 
 );
+
+/*============================================================
+Courses Module
+Part 5 — Pagination + Sorting + Module Lock
+Version : 1.0 Enterprise FINAL
+Status : LOCKED
+============================================================*/
+
+/*==================================================
+PAGINATION SETTINGS
+==================================================*/
+
+let currentPage = 1;
+const coursesPerPage = 6;
+
+/*==================================================
+RENDER PAGINATION
+==================================================*/
+
+function renderPagination(courseList = courseDatabase){
+
+    if(!paginationArea) return;
+
+    const totalPages =
+        Math.ceil(courseList.length / coursesPerPage);
+
+    paginationArea.innerHTML = "";
+
+    if(totalPages <= 1) return;
+
+    for(let i=1;i<=totalPages;i++){
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "pagination-btn";
+
+        if(i===currentPage){
+
+            button.classList.add("active");
+
+        }
+
+        button.textContent = i;
+
+        button.addEventListener("click",()=>{
+
+            currentPage = i;
+
+            paginateCourses(courseList);
+
+        });
+
+        paginationArea.appendChild(button);
+
+    }
+
+}
+
+/*==================================================
+PAGINATE COURSES
+==================================================*/
+
+function paginateCourses(courseList = courseDatabase){
+
+    const start =
+        (currentPage-1)*coursesPerPage;
+
+    const end =
+        start + coursesPerPage;
+
+    renderAllCourses(
+
+        courseList.slice(start,end)
+
+    );
+
+    renderPagination(courseList);
+
+}
+
+/*==================================================
+SORT COURSES
+==================================================*/
+
+function sortCourses(type){
+
+    let sorted = [...courseDatabase];
+
+    switch(type){
+
+        case "name":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                a.title.localeCompare(b.title)
+
+            );
+
+        break;
+
+        case "rating":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                b.rating-a.rating
+
+            );
+
+        break;
+
+        case "lessons":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                b.lessons-a.lessons
+
+            );
+
+        break;
+
+        default:
+
+            break;
+
+    }
+
+    currentPage = 1;
+
+    paginateCourses(sorted);
+
+}
+
+/*==================================================
+SORT EVENT
+==================================================*/
+
+const courseSort =
+
+document.getElementById(
+
+"courseSort"
+
+);
+
+if(courseSort){
+
+    courseSort.addEventListener(
+
+        "change",
+
+        function(){
+
+            sortCourses(this.value);
+
+        }
+
+    );
+
+}
+
+/*==================================================
+INITIALIZE MODULE
+==================================================*/
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+        paginateCourses();
+
+        log(
+
+            "Courses Module Initialized"
+
+        );
+
+    }
+
+);
+
+/*==================================================
+MODULE LOCK
+==================================================*/
+
+Object.freeze(courseDatabase);
+
+console.log(
+
+"✅ Courses Module LOCKED"
+
+);
