@@ -253,9 +253,9 @@ return `
         <div class="course-footer">
             <span class="course-rating">⭐ ${course.rating}</span>
             <span class="course-price">${course.price}</span>
-              <button class="btn-primary course-start" data-course="${course.id}" style="width:100%; margin-top:15px; padding:10px; background:#ffc107; color:#000; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
-         Button Text
-        Start Learning
+        </div>
+        <button class="btn-primary course-start" data-course="${course.id}" style="width:100%; margin-top:15px; padding:10px; background:#2E7D32; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+            Start Learning
         </button>
     </div>
 </div>
