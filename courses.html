@@ -2,7 +2,7 @@
 ScaleFlow University
 Courses Module
 courses.html
-Version 1.0
+Version 1.0 (Optimized & Cleaned)
 ====================================================== -->
 
 <section id="coursesModule" class="courses-module">
@@ -10,470 +10,181 @@ Version 1.0
     <!-- ==========================
          Courses Header
     =========================== -->
-
     <div class="courses-header">
-
         <div class="courses-title">
-
-            <h1>
-                📚 Explore Courses
-            </h1>
-
-            <p>
-
-                Learn • Build • Earn • Grow
-
-            </p>
-
+            <h1>📚 Explore Courses</h1>
+            <p>Learn • Build • Earn • Grow</p>
         </div>
-
     </div>
-
 
     <!-- ==========================
          Search Area
     =========================== -->
-
     <div class="course-search-area">
-
-        <input
-            type="text"
-            id="courseSearchInput"
-            placeholder="Search Courses..."
-            autocomplete="off">
-
+        <input type="text"
+               id="courseSearchInput"
+               placeholder="Search Courses..."
+               autocomplete="off">
     </div>
-
 
     <!-- ==========================
          Filter Area
     =========================== -->
-
     <div class="course-filter-area">
-
-        <button class="course-filter active"
-                data-filter="all">
-
-            All
-
-        </button>
-
-        <button class="course-filter"
-                data-filter="programming">
-
-            Programming
-
-        </button>
-
-        <button class="course-filter"
-                data-filter="business">
-
-            Business
-
-        </button>
-
-        <button class="course-filter"
-                data-filter="automation">
-
-            Automation
-
-        </button>
-
-        <button class="course-filter"
-                data-filter="ai">
-
-            AI
-
-        </button>
-
+        <button class="course-filter active" data-filter="all">All</button>
+        <button class="course-filter" data-filter="programming">Programming</button>
+        <button class="course-filter" data-filter="business">Business</button>
+        <button class="course-filter" data-filter="automation">Automation</button>
+        <button class="course-filter" data-filter="ai">AI</button>
     </div>
-
 
     <!-- ==========================
          Featured Courses
     =========================== -->
-
     <div class="featured-courses">
-
-        <h2>
-
-            ⭐ Featured Courses
-
-        </h2>
-
-        <div id="featuredCoursesGrid"
-             class="courses-grid">
-
-        </div>
-
+        <h2>⭐ Featured Courses</h2>
+        <div id="featuredCoursesGrid" class="courses-grid"></div>
     </div>
 
-       <!-- ==========================
+    <!-- ==========================
          Recommended Courses
     =========================== -->
-
     <div class="recommended-courses">
-
-        <h2>
-            🤖 Recommended For You
-        </h2>
-
-        <div id="recommendedCoursesGrid"
-             class="courses-grid">
-
-        </div>
-
+        <h2>🤖 Recommended For You</h2>
+        <div id="recommendedCoursesGrid" class="courses-grid"></div>
     </div>
 
-
-    <!-- ==========================
-         All Courses
-    =========================== -->
-
-    <div class="all-courses">
-
-        <h2>
-            📚 All Courses
-        </h2>
-
-        <div id="allCoursesGrid"
-             class="courses-grid">
-
-        </div>
-
-    </div>
-
-
-    <!-- ==========================
-         Loading State
-    =========================== -->
-
-    <div id="coursesLoading"
-         class="courses-loading">
-
-        <div class="loading-spinner"></div>
-
-        <p>
-
-            Loading Courses...
-
-        </p>
-
-    </div>
-
-
-    <!-- ==========================
-         Empty State
-    =========================== -->
-
-    <div id="coursesEmptyState"
-         class="courses-empty">
-
-        <h3>
-
-            📭 No Courses Found
-
-        </h3>
-
-        <p>
-
-            Try another search or filter.
-
-        </p>
-
-    </div>
-
-
-    <!-- ==========================
-         Pagination
-    =========================== -->
-
-    <div id="coursesPagination"
-         class="courses-pagination">
-
-    </div>
-
-       <!-- ======================================================
+    <!-- ======================================================
          Recommended Learning Paths
     ======================================================= -->
-
     <section class="learning-paths">
-
         <div class="section-header">
-
             <h2>🎯 Recommended Learning Paths</h2>
-
-            <p>
-                AI recommends these learning paths based on your progress.
-            </p>
-
+            <p>AI recommends these learning paths based on your progress.</p>
         </div>
-
-        <div id="recommendedLearningPaths"
-             class="learning-path-grid">
-
-        </div>
-
+        <div id="recommendedLearningPaths" class="learning-path-grid"></div>
     </section>
-
 
     <!-- ======================================================
          Popular Categories
     ======================================================= -->
-
     <section class="popular-categories">
-
         <div class="section-header">
-
             <h2>📂 Popular Categories</h2>
-
         </div>
-
-        <div id="courseCategories"
-             class="category-grid">
-
-        </div>
-
+        <div id="courseCategories" class="category-grid"></div>
     </section>
-
 
     <!-- ======================================================
          Recently Viewed Courses
     ======================================================= -->
-
     <section class="recent-courses">
-
         <div class="section-header">
-
             <h2>🕒 Recently Viewed</h2>
-
         </div>
-
-        <div id="recentCoursesGrid"
-             class="courses-grid">
-
-        </div>
-
+        <div id="recentCoursesGrid" class="courses-grid"></div>
     </section>
-
 
     <!-- ======================================================
          Continue Learning
     ======================================================= -->
-
     <section class="continue-learning">
-
         <div class="section-header">
-
             <h2>▶ Continue Learning</h2>
-
         </div>
-
-        <div id="continueLearningGrid"
-             class="courses-grid">
-
-        </div>
-
+        <div id="continueLearningGrid" class="courses-grid"></div>
     </section>
-
 
     <!-- ======================================================
          AI Suggestions
     ======================================================= -->
-
     <section class="ai-course-suggestions">
-
         <div class="section-header">
-
             <h2>🤖 AI Course Suggestions</h2>
-
         </div>
-
-        <div id="aiSuggestionsGrid"
-             class="courses-grid">
-
-        </div>
-
+        <div id="aiSuggestionsGrid" class="courses-grid"></div>
     </section>
 
-   <!-- ======================================================
-     All Courses Grid
-====================================================== -->
-
-<section class="all-courses-section">
-
-    <div class="section-header">
-
-        <h2>📚 All Available Courses</h2>
-
-        <p>
-
-            Browse all available courses.
-
-        </p>
-
-    </div>
-
-    <div id="allCoursesGrid"
-
-         class="courses-grid">
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     No Courses Found
-====================================================== -->
-
-<section id="noCoursesFound"
-
-         class="no-courses"
-
-         style="display:none;">
-
-    <div class="empty-state">
-
-        <h3>
-
-            📭 No Courses Found
-
-        </h3>
-
-        <p>
-
-            Try another keyword or category.
-
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     Courses Skeleton Loader
-====================================================== -->
-
-<section id="coursesSkeleton"
-
-         class="courses-skeleton"
-
-         style="display:none;">
-
-    <div class="skeleton-card"></div>
-
-    <div class="skeleton-card"></div>
-
-    <div class="skeleton-card"></div>
-
-    <div class="skeleton-card"></div>
-
-    <div class="skeleton-card"></div>
-
-    <div class="skeleton-card"></div>
-
-</section>
-
-
-<!-- ======================================================
-     Load More
-====================================================== -->
-
-<div class="load-more-container">
-
-    <button
-
-        id="loadMoreCoursesBtn"
-
-        class="btn-primary">
-
-        Load More Courses
-
-    </button>
-
-</div>
-
-   <!-- ======================================================
-     Course Details Modal
-====================================================== -->
-
-<div id="courseDetailsModal"
-
-     class="course-modal">
-
-    <div class="course-modal-content">
-
-        <button
-
-            id="closeCourseModal"
-
-            class="modal-close">
-
-            ✕
-
-        </button>
-
-        <div id="courseDetailsContent">
-
+    <!-- ======================================================
+         All Courses Section
+    ======================================================= -->
+    <section class="all-courses-section">
+        <div class="section-header">
+            <h2>📚 All Available Courses</h2>
+            <p>Browse all available courses.</p>
         </div>
+        <div id="allCoursesGrid" class="courses-grid"></div>
+    </section>
 
+    <!-- ======================================================
+         Loading & Skeleton States
+    ======================================================= -->
+    <div id="coursesLoading" class="courses-loading" style="display:none;">
+        <div class="loading-spinner"></div>
+        <p>Loading Courses...</p>
     </div>
 
-</div>
+    <section id="coursesSkeleton" class="courses-skeleton" style="display:none;">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+    </section>
 
-
-<!-- ======================================================
-     Enrollment Modal
-====================================================== -->
-
-<div id="courseEnrollModal"
-
-     class="course-modal">
-
-    <div class="course-modal-content">
-
-        <button
-
-            id="closeEnrollModal"
-
-            class="modal-close">
-
-            ✕
-
-        </button>
-
-        <div id="courseEnrollContent">
-
+    <!-- ======================================================
+         Empty State / No Courses Found
+    ======================================================= -->
+    <section id="noCoursesFound" class="no-courses" style="display:none;">
+        <div class="empty-state">
+            <h3>📭 No Courses Found</h3>
+            <p>Try another keyword or category.</p>
         </div>
+    </section>
 
+    <!-- ======================================================
+         Load More / Pagination
+    ======================================================= -->
+    <div class="load-more-container">
+        <button id="loadMoreCoursesBtn" class="btn-primary">
+            Load More Courses
+        </button>
     </div>
 
-</div>
+    <div id="coursesPagination" class="courses-pagination"></div>
 
+    <!-- ======================================================
+         Course Details Modal
+    ======================================================= -->
+    <div id="courseDetailsModal" class="course-modal">
+        <div class="course-modal-content">
+            <button id="closeCourseModal" class="modal-close">✕</button>
+            <div id="courseDetailsContent"></div>
+        </div>
+    </div>
 
-<!-- ======================================================
-     Toast Area
-====================================================== -->
+    <!-- ======================================================
+         Enrollment Modal
+    ======================================================= -->
+    <div id="courseEnrollModal" class="course-modal">
+        <div class="course-modal-content">
+            <button id="closeEnrollModal" class="modal-close">✕</button>
+            <div id="courseEnrollContent"></div>
+        </div>
+    </div>
 
-<div id="courseToastArea">
+    <!-- ======================================================
+         Toast Area
+    ======================================================= -->
+    <div id="courseToastArea"></div>
 
-</div>
-
-
-<!-- ======================================================
-     Hidden Data Container
-====================================================== -->
-
-<div id="courseDataContainer"
-
-     style="display:none;">
-
-</div>
+    <!-- ======================================================
+         Hidden Data Container
+    ======================================================= -->
+    <div id="courseDataContainer" style="display:none;"></div>
 
 </section>
-
 <!-- ======================================================
      End Courses Module
 ====================================================== -->
