@@ -1,8 +1,8 @@
 /*============================================================
 Sanaullah ScaleFlow University
 courses.js
-Part 1 — Foundation
-Version : 1.0
+Part 1 — Foundation & DOM References
+Version : 1.0 (Fixed & Optimized)
 Status  : Enterprise
 ============================================================*/
 
@@ -18,37 +18,25 @@ const MODULE_NAME = "Courses Module";
 const MODULE_VERSION = "1.0";
 
 /*==================================================
-DOM REFERENCES
+DOM REFERENCES (Matched with HTML IDs)
 ==================================================*/
 
-const searchArea =
-document.getElementById("courseSearchArea");
-
-const filterArea =
-document.getElementById("courseFilterArea");
-
-const featuredArea =
-document.getElementById("featuredCoursesArea");
-
-const recommendedArea =
-document.getElementById("recommendedCoursesArea");
-
-const allCoursesArea =
-document.getElementById("allCoursesArea");
-
-const paginationArea =
-document.getElementById("paginationArea");
+const searchInput = document.getElementById("courseSearchInput");
+const filterArea = document.querySelector(".course-filter-area");
+const featuredArea = document.getElementById("featuredCoursesGrid");
+const recommendedArea = document.getElementById("recommendedCoursesGrid");
+const allCoursesArea = document.getElementById("allCoursesGrid");
+const paginationArea = document.getElementById("coursesPagination");
+const loadingArea = document.getElementById("coursesLoading");
+const emptyStateArea = document.getElementById("noCoursesFound");
 
 /*==================================================
 GLOBAL STATE
 ==================================================*/
 
 let currentPage = 1;
-
-const coursesPerPage = 9;
-
+const coursesPerPage = 6;
 let activeFilter = "all";
-
 let searchKeyword = "";
 
 /*==================================================
@@ -62,84 +50,44 @@ HELPER FUNCTIONS
 ==================================================*/
 
 function log(message){
-
     console.log("[Courses] " + message);
+}
 
+function showToast(message, type = "success") {
+    const toastArea = document.getElementById("courseToastArea");
+    if (!toastArea) {
+        alert(message);
+        return;
+    }
+    const toast = document.createElement("div");
+    toast.className = `course-toast ${type}`;
+    toast.style.cssText = "background:#2E7D32; color:#fff; padding:12px 20px; margin-top:10px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); font-weight:600; z-index:9999; animation:fadeUp 0.3s ease;";
+    toast.textContent = message;
+    toastArea.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
 
 function isReady(){
-
     return (
-
-        featuredArea &&
-        recommendedArea &&
+        featuredArea ||
+        recommendedArea ||
         allCoursesArea
-
     );
-
 }
-
-/*==================================================
-MODULE START
-==================================================*/
-
-function initializeCoursesModule(){
-
-    if(!isReady()){
-
-        console.warn(
-            "Courses Areas Not Found"
-        );
-
-        return;
-
-    }
-
-    log("Courses Module Initialized");
-
-}
-
-/*==================================================
-PUBLIC API
-==================================================*/
-
-global.CoursesModule = {
-
-    initialize:
-    initializeCoursesModule,
-
-    database:
-    courseDatabase
-
-};
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initializeCoursesModule
-
-);
-
-})(window);
-
 
 /*============================================================
-Courses Module
-Part 2 — Enterprise Course Database
-Version : 1.0
+Part 2 — Enterprise Course Database Items
 ============================================================*/
 
-/*==================================================
-COURSE DATABASE
-==================================================*/
-
 courseDatabase.push(
-
 {
     id:"CRS001",
     title:"HTML & CSS Masterclass",
-    category:"Web Development",
+    category:"programming",
     difficulty:"Beginner",
     instructor:"Sanaullah",
     duration:"12 Hours",
@@ -152,11 +100,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS002",
     title:"JavaScript Professional",
-    category:"Web Development",
+    category:"programming",
     difficulty:"Intermediate",
     instructor:"Sanaullah",
     duration:"20 Hours",
@@ -169,11 +116,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS003",
     title:"Google Apps Script",
-    category:"Automation",
+    category:"automation",
     difficulty:"Advanced",
     instructor:"Sanaullah",
     duration:"25 Hours",
@@ -186,11 +132,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS004",
     title:"AI Productivity",
-    category:"Artificial Intelligence",
+    category:"ai",
     difficulty:"Intermediate",
     instructor:"Sanaullah",
     duration:"15 Hours",
@@ -203,11 +148,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS005",
     title:"Business Automation",
-    category:"Business",
+    category:"business",
     difficulty:"Advanced",
     instructor:"Sanaullah",
     duration:"18 Hours",
@@ -220,11 +164,10 @@ courseDatabase.push(
     price:"Premium",
     status:"Active"
 },
-
 {
     id:"CRS006",
     title:"Freelancing Mastery",
-    category:"Freelancing",
+    category:"business",
     difficulty:"Beginner",
     instructor:"Sanaullah",
     duration:"10 Hours",
@@ -237,11 +180,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS007",
     title:"SEO Complete Guide",
-    category:"Marketing",
+    category:"business",
     difficulty:"Intermediate",
     instructor:"Sanaullah",
     duration:"14 Hours",
@@ -254,11 +196,10 @@ courseDatabase.push(
     price:"Free",
     status:"Active"
 },
-
 {
     id:"CRS008",
     title:"Digital Marketing",
-    category:"Marketing",
+    category:"business",
     difficulty:"Intermediate",
     instructor:"Sanaullah",
     duration:"16 Hours",
@@ -271,11 +212,10 @@ courseDatabase.push(
     price:"Premium",
     status:"Active"
 },
-
 {
     id:"CRS009",
     title:"ScaleFlow Enterprise",
-    category:"Business",
+    category:"business",
     difficulty:"Advanced",
     instructor:"Sanaullah",
     duration:"30 Hours",
@@ -288,583 +228,184 @@ courseDatabase.push(
     price:"Premium",
     status:"Coming Soon"
 }
-
-/* مزید Courses بعد میں اسی Array میں شامل ہوں گے */
-
 );
 
-log(
-    "Course Database Loaded : " +
-    courseDatabase.length +
-    " Courses"
-);
+log("Course Database Loaded : " + courseDatabase.length + " Courses");
 
 /*============================================================
-Courses Module
-Part 3 — Featured & Recommended Renderer
-Version : 1.0
+Part 3 — Course Card Template & Render Functions
 ============================================================*/
-
-/*==================================================
-COURSE CARD TEMPLATE
-==================================================*/
 
 function createCourseCard(course){
-
 return `
-
-<div class="course-card"
-     data-id="${course.id}"
-     data-category="${course.category}"
-     data-difficulty="${course.difficulty}">
-
+<div class="course-card" data-id="${course.id}" data-category="${course.category}" data-difficulty="${course.difficulty}">
     <div class="course-image">
-
-        <img src="${course.image}"
-             alt="${course.title}">
-
+        <img src="${course.image}" alt="${course.title}" onerror="this.src='https://via.placeholder.com/400x200?text=ScaleFlow+Course'">
     </div>
-
     <div class="course-content">
-
-        <span class="course-category">
-            ${course.category}
-        </span>
-
-        <h3 class="course-title">
-            ${course.title}
-        </h3>
-
-        <p class="course-instructor">
-            👨‍🏫 ${course.instructor}
-        </p>
-
+        <span class="course-category">${course.category}</span>
+        <h3 class="course-title">${course.title}</h3>
+        <p class="course-instructor">👨‍🏫 ${course.instructor}</p>
         <div class="course-meta">
-
             <span>📚 ${course.lessons} Lessons</span>
-
             <span>⏱ ${course.duration}</span>
-
         </div>
-
         <div class="course-footer">
-
-            <span class="course-rating">
-                ⭐ ${course.rating}
-            </span>
-
-            <span class="course-price">
-                ${course.price}
-            </span>
-
+            <span class="course-rating">⭐ ${course.rating}</span>
+            <span class="course-price">${course.price}</span>
         </div>
-
-        <button
-            class="btn-primary course-start"
-            data-course="${course.id}">
-
+        <button class="btn-primary course-start" data-course="${course.id}" style="width:100%; margin-top:15px; padding:10px; background:#2E7D32; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
             Start Learning
-
         </button>
-
     </div>
-
 </div>
-
 `;
-
 }
-
-/*==================================================
-FEATURED COURSES
-==================================================*/
 
 function renderFeaturedCourses(){
-
     if(!featuredArea) return;
-
-    const featured =
-    courseDatabase.filter(
-
-        c => c.featured === true
-
-    );
-
-    featuredArea.innerHTML =
-    featured
-        .map(createCourseCard)
-        .join("");
-
-    log(
-        "Featured Courses Rendered"
-    );
-
+    const featured = courseDatabase.filter(c => c.featured === true);
+    featuredArea.innerHTML = featured.map(createCourseCard).join("");
+    log("Featured Courses Rendered");
 }
-
-/*==================================================
-RECOMMENDED COURSES
-==================================================*/
 
 function renderRecommendedCourses(){
-
     if(!recommendedArea) return;
-
-    const recommended =
-    courseDatabase.filter(
-
-        c => c.recommended === true
-
-    );
-
-    recommendedArea.innerHTML =
-    recommended
-        .map(createCourseCard)
-        .join("");
-
-    log(
-        "Recommended Courses Rendered"
-    );
-
+    const recommended = courseDatabase.filter(c => c.recommended === true);
+    recommendedArea.innerHTML = recommended.map(createCourseCard).join("");
+    log("Recommended Courses Rendered");
 }
-
-/*==================================================
-INITIAL RENDER
-==================================================*/
-
-function renderHomeCourses(){
-
-    renderFeaturedCourses();
-
-    renderRecommendedCourses();
-
-}
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    renderHomeCourses
-
-);
-
-/*============================================================
-Courses Module
-Part 4 — All Courses Grid + Search + Filter
-Version : 1.0 Enterprise
-============================================================*/
-
-/*==================================================
-RENDER ALL COURSES
-==================================================*/
 
 function renderAllCourses(courseList = courseDatabase){
-
     if(!allCoursesArea) return;
 
     if(courseList.length === 0){
-
-        allCoursesArea.innerHTML = `
-
-        <div class="empty-state">
-
-            <h3>No Courses Found</h3>
-
-            <p>Please try another search.</p>
-
-        </div>
-
-        `;
-
+        allCoursesArea.innerHTML = "";
+        if(emptyStateArea) emptyStateArea.style.display = "block";
         return;
-
     }
 
-    allCoursesArea.innerHTML = courseList
-        .map(createCourseCard)
-        .join("");
-
+    if(emptyStateArea) emptyStateArea.style.display = "none";
+    allCoursesArea.innerHTML = courseList.map(createCourseCard).join("");
 }
-
-/*==================================================
-SEARCH
-==================================================*/
-
-function searchCourses(keyword){
-
-    searchKeyword = keyword.toLowerCase().trim();
-
-    const result = courseDatabase.filter(course=>{
-
-        return (
-
-            course.title.toLowerCase().includes(searchKeyword) ||
-
-            course.category.toLowerCase().includes(searchKeyword) ||
-
-            course.instructor.toLowerCase().includes(searchKeyword)
-
-        );
-
-    });
-
-    renderAllCourses(result);
-
-}
-
-/*==================================================
-FILTER
-==================================================*/
-
-function filterCourses(filter){
-
-    activeFilter = filter;
-
-    if(filter==="all"){
-
-        renderAllCourses();
-
-        return;
-
-    }
-
-    const result = courseDatabase.filter(course=>{
-
-        return (
-
-            course.category===filter ||
-
-            course.difficulty===filter ||
-
-            course.price===filter ||
-
-            course.status===filter
-
-        );
-
-    });
-
-    renderAllCourses(result);
-
-}
-
-/*==================================================
-SEARCH EVENTS
-==================================================*/
-
-const courseSearchInput =
-document.getElementById("courseSearchInput");
-
-if(courseSearchInput){
-
-    courseSearchInput.addEventListener(
-
-        "input",
-
-        function(){
-
-            searchCourses(this.value);
-
-        }
-
-    );
-
-}
-
-/*==================================================
-FILTER EVENTS
-==================================================*/
-
-document.querySelectorAll(
-
-".course-filter"
-
-).forEach(button=>{
-
-    button.addEventListener(
-
-        "click",
-
-        function(){
-
-            document
-            .querySelectorAll(".course-filter")
-            .forEach(btn=>{
-
-                btn.classList.remove("active");
-
-            });
-
-            this.classList.add("active");
-
-            filterCourses(
-
-                this.dataset.filter
-
-            );
-
-        }
-
-    );
-
-});
-
-/*==================================================
-START COURSE BUTTON
-==================================================*/
-
-document.addEventListener(
-
-    "click",
-
-    function(e){
-
-        if(
-
-            e.target.classList.contains(
-
-                "course-start"
-
-            )
-
-        ){
-
-            const courseId =
-
-            e.target.dataset.course;
-
-            showToast(
-
-                "Opening Course : " +
-
-                courseId,
-
-                "success"
-
-            );
-
-            navigateTo("page4");
-
-        }
-
-    }
-
-);
-
-/*==================================================
-INITIAL LOAD
-==================================================*/
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-        renderAllCourses();
-
-        log("All Courses Rendered");
-
-    }
-
-);
 
 /*============================================================
-Courses Module
-Part 5 — Pagination + Sorting + Module Lock
-Version : 1.0 Enterprise FINAL
-Status : LOCKED
+Part 4 — Search, Filter & Pagination Logic
 ============================================================*/
 
-/*==================================================
-PAGINATION SETTINGS
-==================================================*/
-
-let currentPage = 1;
-const coursesPerPage = 6;
-
-/*==================================================
-RENDER PAGINATION
-==================================================*/
-
 function renderPagination(courseList = courseDatabase){
-
     if(!paginationArea) return;
-
-    const totalPages =
-        Math.ceil(courseList.length / coursesPerPage);
-
+    const totalPages = Math.ceil(courseList.length / coursesPerPage);
     paginationArea.innerHTML = "";
 
     if(totalPages <= 1) return;
 
-    for(let i=1;i<=totalPages;i++){
-
-        const button =
-        document.createElement("button");
-
-        button.className =
-        "pagination-btn";
-
-        if(i===currentPage){
-
-            button.classList.add("active");
-
-        }
-
+    for(let i=1; i<=totalPages; i++){
+        const button = document.createElement("button");
+        button.className = "pagination-btn";
+        if(i === currentPage) button.classList.add("active");
         button.textContent = i;
-
-        button.addEventListener("click",()=>{
-
+        button.addEventListener("click", () => {
             currentPage = i;
-
             paginateCourses(courseList);
-
         });
-
         paginationArea.appendChild(button);
-
     }
-
 }
-
-/*==================================================
-PAGINATE COURSES
-==================================================*/
 
 function paginateCourses(courseList = courseDatabase){
-
-    const start =
-        (currentPage-1)*coursesPerPage;
-
-    const end =
-        start + coursesPerPage;
-
-    renderAllCourses(
-
-        courseList.slice(start,end)
-
-    );
-
+    const start = (currentPage - 1) * coursesPerPage;
+    const end = start + coursesPerPage;
+    renderAllCourses(courseList.slice(start, end));
     renderPagination(courseList);
-
 }
 
-/*==================================================
-SORT COURSES
-==================================================*/
-
-function sortCourses(type){
-
-    let sorted = [...courseDatabase];
-
-    switch(type){
-
-        case "name":
-
-            sorted.sort(
-
-                (a,b)=>
-
-                a.title.localeCompare(b.title)
-
-            );
-
-        break;
-
-        case "rating":
-
-            sorted.sort(
-
-                (a,b)=>
-
-                b.rating-a.rating
-
-            );
-
-        break;
-
-        case "lessons":
-
-            sorted.sort(
-
-                (a,b)=>
-
-                b.lessons-a.lessons
-
-            );
-
-        break;
-
-        default:
-
-            break;
-
-    }
-
+function searchCourses(keyword){
+    searchKeyword = keyword.toLowerCase().trim();
+    const result = courseDatabase.filter(course => {
+        return (
+            course.title.toLowerCase().includes(searchKeyword) ||
+            course.category.toLowerCase().includes(searchKeyword) ||
+            course.instructor.toLowerCase().includes(searchKeyword)
+        );
+    });
     currentPage = 1;
+    paginateCourses(result);
+}
 
-    paginateCourses(sorted);
-
+function filterCourses(filter){
+    activeFilter = filter;
+    if(filter === "all"){
+        paginateCourses(courseDatabase);
+        return;
+    }
+    const result = courseDatabase.filter(course => {
+        return (
+            course.category.toLowerCase() === filter.toLowerCase() ||
+            course.difficulty.toLowerCase() === filter.toLowerCase() ||
+            course.price.toLowerCase() === filter.toLowerCase() ||
+            course.status.toLowerCase() === filter.toLowerCase()
+        );
+    });
+    currentPage = 1;
+    paginateCourses(result);
 }
 
 /*==================================================
-SORT EVENT
+EVENT LISTENERS
 ==================================================*/
 
-const courseSort =
-
-document.getElementById(
-
-"courseSort"
-
-);
-
-if(courseSort){
-
-    courseSort.addEventListener(
-
-        "change",
-
-        function(){
-
-            sortCourses(this.value);
-
-        }
-
-    );
-
+if(searchInput){
+    searchInput.addEventListener("input", function(){
+        searchCourses(this.value);
+    });
 }
+
+document.querySelectorAll(".course-filter").forEach(button => {
+    button.addEventListener("click", function(){
+        document.querySelectorAll(".course-filter").forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+        filterCourses(this.dataset.filter);
+    });
+});
+
+document.addEventListener("click", function(e){
+    if(e.target.classList.contains("course-start")){
+        const courseId = e.target.dataset.course;
+        const selectedCourse = courseDatabase.find(c => c.id === courseId);
+        const courseTitle = selectedCourse ? selectedCourse.title : courseId;
+        
+        showToast("Opening Course : " + courseTitle, "success");
+        
+        // اگر آپ کے پاس نیویگیشن فنکشن موجود ہے تو یہ کورس پیج کھول دے گا
+        if(typeof navigateTo === "function"){
+            navigateTo("courseDetails");
+        }
+    }
+});
 
 /*==================================================
 INITIALIZE MODULE
 ==================================================*/
 
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-        paginateCourses();
-
-        log(
-
-            "Courses Module Initialized"
-
-        );
-
+function initializeCoursesModule(){
+    if(!isReady()){
+        console.warn("Courses Areas Not Found");
+        return;
     }
+    renderFeaturedCourses();
+    renderRecommendedCourses();
+    paginateCourses(courseDatabase);
+    log("Courses Module Initialized & Fully Operational");
+}
 
-);
+document.addEventListener("DOMContentLoaded", initializeCoursesModule);
 
 /*==================================================
 MODULE LOCK
 ==================================================*/
 
 Object.freeze(courseDatabase);
+console.log("✅ Courses Module LOCKED & Secured");
 
-console.log(
-
-"✅ Courses Module LOCKED"
-
-);
+})(window);
