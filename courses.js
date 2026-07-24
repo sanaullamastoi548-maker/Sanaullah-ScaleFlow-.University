@@ -59,3 +59,76 @@ FOUNDATION READY
 ============================================================*/
 
 log("Part A Loaded Successfully");
+
+    /*============================================================
+Part B — DOM References
+============================================================*/
+
+let searchInput = null;
+let filterArea = null;
+
+let featuredArea = null;
+let recommendedArea = null;
+let allCoursesArea = null;
+
+let paginationArea = null;
+let loadingArea = null;
+let emptyStateArea = null;
+
+let toastArea = null;
+
+let detailsModal = null;
+let enrollModal = null;
+
+/*============================================================
+LOAD DOM REFERENCES
+============================================================*/
+
+function loadCourseDOM() {
+
+    searchInput = document.getElementById("courseSearchInput");
+    filterArea = document.querySelector(".course-filter-area");
+
+    featuredArea = document.getElementById("featuredCoursesGrid");
+    recommendedArea = document.getElementById("recommendedCoursesGrid");
+    allCoursesArea = document.getElementById("allCoursesGrid");
+
+    paginationArea = document.getElementById("coursesPagination");
+    loadingArea = document.getElementById("coursesLoading");
+    emptyStateArea = document.getElementById("noCoursesFound");
+
+    toastArea = document.getElementById("courseToastArea");
+
+    detailsModal = document.getElementById("courseDetailsModal");
+    enrollModal = document.getElementById("courseEnrollModal");
+
+    log("DOM References Loaded");
+}
+
+/*============================================================
+DOM VALIDATION
+============================================================*/
+
+function validateCourseDOM() {
+
+    const required = [
+        featuredArea,
+        recommendedArea,
+        allCoursesArea
+    ];
+
+    const ready = required.every(item => item !== null);
+
+    if (!ready) {
+
+        warn("Course HTML ابھی Load نہیں ہوا۔");
+
+        return false;
+
+    }
+
+    log("DOM Validation Passed");
+
+    return true;
+
+}
