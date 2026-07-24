@@ -401,8 +401,9 @@ function initializeCoursesModule(){
     log("Courses Module Initialized & Fully Operational");
 }
 
-document.addEventListener("DOMContentLoaded", initializeCoursesModule);
 
+// Initialize immediately
+initializeCoursesModule();
 /*==================================================
 MODULE LOCK
 ==================================================*/
