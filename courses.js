@@ -132,3 +132,95 @@ function validateCourseDOM() {
     return true;
 
 }
+
+ /*============================================================
+Part C — Course Database Manager
+============================================================*/
+
+/*============================================================
+DATABASE FUNCTIONS
+============================================================*/
+
+function addCourse(course) {
+
+    if (!course) return;
+
+    courseDatabase.push(course);
+
+}
+
+function addCourses(courseArray) {
+
+    if (!Array.isArray(courseArray)) return;
+
+    courseArray.forEach(addCourse);
+
+}
+
+function getAllCourses() {
+
+    return [...courseDatabase];
+
+}
+
+function getFeaturedCourses() {
+
+    return courseDatabase.filter(course => course.featured === true);
+
+}
+
+function getRecommendedCourses() {
+
+    return courseDatabase.filter(course => course.recommended === true);
+
+}
+
+function getCourseById(id) {
+
+    return courseDatabase.find(course => course.id === id);
+
+}
+
+function getCoursesByCategory(category) {
+
+    if (category === "all") {
+
+        return getAllCourses();
+
+    }
+
+    return courseDatabase.filter(course => course.category === category);
+
+}
+
+function searchCourses(keyword) {
+
+    if (!keyword || keyword.trim() === "") {
+
+        return getAllCourses();
+
+    }
+
+    keyword = keyword.toLowerCase();
+
+    return courseDatabase.filter(course => {
+
+        return (
+
+            course.title.toLowerCase().includes(keyword) ||
+
+            course.category.toLowerCase().includes(keyword) ||
+
+            course.instructor.toLowerCase().includes(keyword)
+
+        );
+
+    });
+
+}
+
+/*============================================================
+DATABASE READY
+============================================================*/
+
+log("Course Database Manager Ready");
