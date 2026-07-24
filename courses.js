@@ -305,3 +305,228 @@ function renderCards(container, list) {
     container.innerHTML = list.map(createCourseCard).join("");
 
 }
+
+    /*============================================================
+Part E — Render Engine
+============================================================*/
+
+/*============================================================
+FEATURED COURSES
+============================================================*/
+
+function renderFeaturedCourses() {
+
+    if (!featuredArea) return;
+
+    const featured = getFeaturedCourses();
+
+    renderCards(featuredArea, featured);
+
+    log("Featured Courses Rendered");
+
+}
+
+/*============================================================
+RECOMMENDED COURSES
+============================================================*/
+
+function renderRecommendedCourses() {
+
+    if (!recommendedArea) return;
+
+    const recommended = getRecommendedCourses();
+
+    renderCards(recommendedArea, recommended);
+
+    log("Recommended Courses Rendered");
+
+}
+
+/*============================================================
+ALL COURSES
+============================================================*/
+
+function renderAllCourses(courseList = getAllCourses()) {
+
+    if (!allCoursesArea) return;
+
+    currentCourses = [...courseList];
+
+    if (courseList.length === 0) {
+
+        allCoursesArea.innerHTML = "";
+
+        if (emptyStateArea) {
+
+            emptyStateArea.style.display = "block";
+
+        }
+
+        return;
+
+    }
+
+    if (emptyStateArea) {
+
+        emptyStateArea.style.display = "none";
+
+    }
+
+    renderCards(allCoursesArea, courseList);
+
+    log("All Courses Rendered : " + courseList.length);
+
+}
+
+/*============================================================
+MASTER RENDER
+============================================================*/
+
+function renderCoursesModule() {
+
+    renderFeaturedCourses();
+
+    renderRecommendedCourses();
+
+    renderAllCourses();
+
+    log("Courses Module Render Complete");
+
+}
+
+    
+/*============================================================
+Part F — Integration Engine
+Version : 1.0
+============================================================*/
+
+function initializeCoursesModule() {
+
+    log("Initializing Courses Module...");
+
+    if (!isReady()) {
+        console.error("[Courses] HTML containers not found.");
+        return;
+    }
+
+    if (loadingArea) {
+        loadingArea.style.display = "block";
+    }
+
+    setTimeout(() => {
+
+        if (loadingArea) {
+            loadingArea.style.display = "none";
+        }
+
+        renderFeaturedCourses();
+        renderRecommendedCourses();
+        renderAllCourses();
+
+        attachSearchEngine();
+        attachFilterEngine();
+
+        log("Courses Module Initialized Successfully.");
+
+    }, 400);
+
+}
+
+/*==================================================
+SEARCH ENGINE
+==================================================*/
+
+function attachSearchEngine(){
+
+    if(!searchInput) return;
+
+    searchInput.addEventListener("input",function(){
+
+        searchKeyword=this.value.toLowerCase().trim();
+
+        renderAllCourses();
+
+    });
+
+}
+
+/*==================================================
+FILTER ENGINE
+==================================================*/
+
+function attachFilterEngine(){
+
+    const filters=document.querySelectorAll(".course-filter");
+
+    filters.forEach(btn=>{
+
+        btn.addEventListener("click",function(){
+
+            filters.forEach(x=>x.classList.remove("active"));
+
+            this.classList.add("active");
+
+            activeFilter=this.dataset.filter;
+
+            renderAllCourses();
+
+        });
+
+    });
+
+}
+
+/*==================================================
+AUTO START
+==================================================*/
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    initializeCoursesModule();
+
+});
+
+ /*============================================================
+Part G — Navigation Engine
+Version : 1.0
+============================================================*/
+
+function openCoursesPage() {
+
+    document.querySelectorAll(".page-section").forEach(section => {
+        section.style.display = "none";
+    });
+
+    const coursesPage = document.getElementById("page3");
+    if (coursesPage) {
+        coursesPage.style.display = "block";
+    }
+
+    document.querySelectorAll(".sidebar-menu a").forEach(link => {
+        link.classList.remove("active");
+    });
+
+    const navCourses = document.getElementById("navPage3");
+    if (navCourses) {
+        navCourses.classList.add("active");
+    }
+
+    initializeCoursesModule();
+
+    log("Courses Page Opened.");
+
+}
+
+const navCourses = document.getElementById("navPage3");
+
+if (navCourses) {
+
+    navCourses.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        openCoursesPage();
+
+    });
+
+}
