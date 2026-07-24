@@ -530,3 +530,179 @@ if (navCourses) {
     });
 
 }
+
+    /*============================================================
+Part H — AI Placeholder Engine
+============================================================*/
+
+function showComingSoon(featureName){
+
+    const message =
+`🚧 ${featureName}
+
+This feature is under development.
+
+The interface is ready, but its engine has not been connected yet.
+
+It will become available in a future ScaleFlow University update.`;
+
+    showToast(message,"success");
+
+}
+
+document.addEventListener("click",function(e){
+
+    const card=e.target.closest(".course-card");
+
+    if(!card) return;
+
+    const courseId=card.dataset.courseid;
+
+    const course=courseDatabase.find(c=>c.id===courseId);
+
+    if(!course) return;
+
+    if(course.status==="Coming Soon"){
+
+        showComingSoon(course.title);
+
+        return;
+
+    }
+
+    showToast(
+        "📚 "+course.title+
+        "\n\nLearning Engine will be connected in the next update."
+    );
+
+});
+
+    /*============================================================
+Part I — Course Details Modal Engine
+Version : 1.0
+============================================================*/
+
+function openCourseDetails(courseId){
+
+    const course = courseDatabase.find(c => c.id === courseId);
+
+    if(!course){
+        showToast("Course not found.","error");
+        return;
+    }
+
+    const modal = document.getElementById("courseDetailsModal");
+    const content = document.getElementById("courseDetailsContent");
+
+    if(!modal || !content){
+        console.error("[Courses] Course Details Modal not found.");
+        return;
+    }
+
+    content.innerHTML = `
+        <div class="course-details-card">
+
+            <h2>${course.title}</h2>
+
+            <p><strong>Instructor:</strong> ${course.instructor}</p>
+
+            <p><strong>Category:</strong> ${course.category}</p>
+
+            <p><strong>Difficulty:</strong> ${course.difficulty}</p>
+
+            <p><strong>Duration:</strong> ${course.duration}</p>
+
+            <p><strong>Lessons:</strong> ${course.lessons}</p>
+
+            <p><strong>Students:</strong> ${course.students}</p>
+
+            <p><strong>Rating:</strong> ⭐ ${course.rating}</p>
+
+            <p><strong>Price:</strong> ${course.price}</p>
+
+            <p><strong>Status:</strong> ${course.status}</p>
+
+            <div style="margin-top:20px;">
+                <button id="enrollNowBtn"
+                        class="btn-primary"
+                        data-courseid="${course.id}">
+                        🎓 Enroll Now
+                </button>
+            </div>
+
+        </div>
+    `;
+
+    modal.style.display = "flex";
+
+}
+
+/*==================================================
+Close Modal
+==================================================*/
+
+const closeCourseModalBtn =
+document.getElementById("closeCourseModal");
+
+if(closeCourseModalBtn){
+
+    closeCourseModalBtn.addEventListener("click",function(){
+
+        document.getElementById("courseDetailsModal").style.display="none";
+
+    });
+
+}
+
+window.addEventListener("click",function(e){
+
+    const modal=document.getElementById("courseDetailsModal");
+
+    if(e.target===modal){
+
+        modal.style.display="none";
+
+    }
+
+});
+
+/*==================================================
+Open Details From Course Card
+==================================================*/
+
+document.addEventListener("click",function(e){
+
+    const card=e.target.closest(".course-card");
+
+    if(!card) return;
+
+    const id=card.dataset.courseid;
+
+    if(id){
+
+        openCourseDetails(id);
+
+    }
+
+});
+
+/*==================================================
+Enrollment Placeholder
+==================================================*/
+
+document.addEventListener("click",function(e){
+
+    if(e.target.id!=="enrollNowBtn") return;
+
+    const id=e.target.dataset.courseid;
+
+    const course=courseDatabase.find(c=>c.id===id);
+
+    showToast(
+        "🎓 Enrollment Engine\n\n"+
+        "Course: "+course.title+
+        "\n\nThis feature will be activated after the Enrollment Engine is connected."
+    );
+
+});
+ 
