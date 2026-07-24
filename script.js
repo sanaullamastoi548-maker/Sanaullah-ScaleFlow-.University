@@ -469,12 +469,19 @@ document.addEventListener("DOMContentLoaded", function () {
         } 
     }, 300); 
 
-    window.initializeCoursesModule = initializeCoursesModule;
+    document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 DOM Loaded");
 
-document.addEventListener("DOMContentLoaded", initializeCoursesModule);
+    try {
+        navigateTo("page1");
+        showToast("🎓 Welcome to ScaleFlow University", "success");
+    } catch (error) {
+        console.error(error);
+    }
 
-Object.freeze(courseDatabase);
-
-console.log("✅ Courses Module LOCKED & Secured");
+    setTimeout(function () {
+        hideLoader();
+    }, 300);
+});
 
 })(window);
