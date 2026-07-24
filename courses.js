@@ -1,3 +1,5 @@
+console.log("initializeCoursesModule Started");
+
 /*============================================================
 Sanaullah ScaleFlow University
 courses.js
