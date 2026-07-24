@@ -224,3 +224,84 @@ DATABASE READY
 ============================================================*/
 
 log("Course Database Manager Ready");
+
+    
+/*============================================================
+Part D — Course Card Renderer
+============================================================*/
+
+function createCourseCard(course) {
+
+    return `
+    <div class="course-card"
+         data-id="${course.id}"
+         data-category="${course.category}"
+         data-difficulty="${course.difficulty}">
+
+        <div class="course-image">
+            <img src="${course.image}"
+                 alt="${course.title}"
+                 onerror="this.src='https://via.placeholder.com/400x220?text=ScaleFlow+University'">
+        </div>
+
+        <div class="course-content">
+
+            <span class="course-category">
+                ${course.category}
+            </span>
+
+            <h3 class="course-title">
+                ${course.title}
+            </h3>
+
+            <p class="course-instructor">
+                👨‍🏫 ${course.instructor}
+            </p>
+
+            <div class="course-meta">
+
+                <span>📚 ${course.lessons} Lessons</span>
+
+                <span>⏱ ${course.duration}</span>
+
+            </div>
+
+            <div class="course-footer">
+
+                <span class="course-rating">
+                    ⭐ ${course.rating}
+                </span>
+
+                <span class="course-price">
+                    ${course.price}
+                </span>
+
+            </div>
+
+            <button
+                class="course-start btn-primary"
+                type="button"
+                data-course="${course.id}">
+
+                ▶ Start Learning
+
+            </button>
+
+        </div>
+
+    </div>
+    `;
+
+}
+
+/*============================================================
+Render Helpers
+============================================================*/
+
+function renderCards(container, list) {
+
+    if (!container) return;
+
+    container.innerHTML = list.map(createCourseCard).join("");
+
+}
