@@ -120,7 +120,7 @@ function toggleDarkMode() {
 darkModeBtn?.addEventListener('click', toggleDarkMode);
 
 // ============================================================
-// 6. NAVIGATION — صفحات کا تبادلہ
+// 6. NAVIGATION — صفحات کا تبادلہ (Courses Module Trigger Included)
 // ============================================================
 function navigateTo(pageId) {
     if (!pageSections || !pageSections[pageId]) {
@@ -133,6 +133,14 @@ function navigateTo(pageId) {
         }
     });
     pageSections[pageId].classList.add("active");
+
+    // 🚀 کورسز ماڈیول کو متحرک کرنے کا چیک
+    if (pageId === "page3") {
+        if (typeof initializeCoursesModule === "function") {
+            initializeCoursesModule();
+        }
+    }
+
     navLinks.forEach(link => {
         link.classList.remove("active");
     });
@@ -221,35 +229,35 @@ function updateDashboardStats() {
         projects: 3
     };
 
-    const els = {
-        studentName: document.getElementById('studentName'),
-        brainXP: document.getElementById('brainXP'),
-        currentLevel: document.getElementById('currentLevel'),
-        learningStreak: document.getElementById('learningStreak'),
-        overallProgress: document.getElementById('overallProgress'),
-        courseCount: document.getElementById('courseCount'),
-        certificateCount: document.getElementById('certificateCount'),
-        achievementCount: document.getElementById('achievementCount'),
-        projectCount: document.getElementById('projectCount'),
-        dashName: document.getElementById('dashName'),
-        sidebarXP: document.getElementById('sidebarXP'),
-        sidebarUserName: document.getElementById('sidebarUserName'),
-        sidebarUserLevel: document.getElementById('sidebarUserLevel')
-    };
-
-    if (els.studentName) els.studentName.textContent = data.name;
-    if (els.brainXP) els.brainXP.textContent = data.xp;
-    if (els.currentLevel) els.currentLevel.textContent = data.level;
-    if (els.learningStreak) els.learningStreak.textContent = data.streak;
-    if (els.overallProgress) els.overallProgress.textContent = data.progress;
-    if (els.courseCount) els.courseCount.textContent = data.courses;
-    if (els.certificateCount) els.certificateCount.textContent = data.certificates;
-    if (els.achievementCount) els.achievementCount.textContent = data.achievements;
-    if (els.projectCount) els.projectCount.textContent = data.projects;
-    if (els.dashName) els.dashName.textContent = data.name;
-    if (els.sidebarXP) els.sidebarXP.textContent = data.xp;
-    if (els.sidebarUserName) els.sidebarUserName.textContent = data.name;
-    if (els.sidebarUserLevel) els.sidebarUserLevel.textContent = data.level + ' • Advanced';
+    const els = { 
+        studentName: document.getElementById('studentName'), 
+        brainXP: document.getElementById('brainXP'), 
+        currentLevel: document.getElementById('currentLevel'), 
+        learningStreak: document.getElementById('learningStreak'), 
+        overallProgress: document.getElementById('overallProgress'), 
+        courseCount: document.getElementById('courseCount'), 
+        certificateCount: document.getElementById('certificateCount'), 
+        achievementCount: document.getElementById('achievementCount'), 
+        projectCount: document.getElementById('projectCount'), 
+        dashName: document.getElementById('dashName'), 
+        sidebarXP: document.getElementById('sidebarXP'), 
+        sidebarUserName: document.getElementById('sidebarUserName'), 
+        sidebarUserLevel: document.getElementById('sidebarUserLevel') 
+    }; 
+    
+    if (els.studentName) els.studentName.textContent = data.name; 
+    if (els.brainXP) els.brainXP.textContent = data.xp; 
+    if (els.currentLevel) els.currentLevel.textContent = data.level; 
+    if (els.learningStreak) els.learningStreak.textContent = data.streak; 
+    if (els.overallProgress) els.overallProgress.textContent = data.progress; 
+    if (els.courseCount) els.courseCount.textContent = data.courses; 
+    if (els.certificateCount) els.certificateCount.textContent = data.certificates; 
+    if (els.achievementCount) els.achievementCount.textContent = data.achievements; 
+    if (els.projectCount) els.projectCount.textContent = data.projects; 
+    if (els.dashName) els.dashName.textContent = data.name; 
+    if (els.sidebarXP) els.sidebarXP.textContent = data.xp; 
+    if (els.sidebarUserName) els.sidebarUserName.textContent = data.name; 
+    if (els.sidebarUserLevel) els.sidebarUserLevel.textContent = data.level + ' • Advanced'; 
 }
 
 // Continue Learning Progress
@@ -341,24 +349,24 @@ if (chatSendBtn && chatInput && chatMessages) {
         chatInput.value = '';
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        setTimeout(() => {
-            const aiMsg = document.createElement('div');
-            aiMsg.className = 'message ai';
-            const responses = [
-                "That's a great question! Let me think about it...",
-                "I understand. Here's what I can help you with.",
-                "Good point! Let me explain it step by step.",
-                "Excellent! You're on the right track."
-            ];
-            aiMsg.textContent = responses[Math.floor(Math.random() * responses.length)];
-            chatMessages.appendChild(aiMsg);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 600);
-    });
+        setTimeout(() => { 
+            const aiMsg = document.createElement('div'); 
+            aiMsg.className = 'message ai'; 
+            const responses = [ 
+                "That's a great question! Let me think about it...", 
+                "I understand. Here's what I can help you with.", 
+                "Good point! Let me explain it step by step.", 
+                "Excellent! You're on the right track." 
+            ]; 
+            aiMsg.textContent = responses[Math.floor(Math.random() * responses.length)]; 
+            chatMessages.appendChild(aiMsg); 
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
+        }, 600); 
+    }); 
 
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') chatSendBtn.click();
-    });
+    chatInput.addEventListener('keypress', function(e) { 
+        if (e.key === 'Enter') chatSendBtn.click(); 
+    }); 
 }
 
 if (chatClearBtn && chatMessages) {
@@ -387,47 +395,47 @@ document.getElementById('loginForm')?.addEventListener('submit', function(e) {
     const passwordField = document.getElementById('loginPassword');
     if (!emailField || !passwordField) return;
 
-    const email = emailField.value.trim();
-    const password = passwordField.value.trim();
-
-    if (!email || !password) {
-        showToast('⚠️ Please fill in both fields.', 'warning');
-        return;
-    }
-    if (!email.includes('@')) {
-        showToast('⚠️ Please enter a valid email address.', 'warning');
-        return;
-    }
-    if (password.length < 6) {
-        showToast('⚠️ Password must be at least 6 characters.', 'warning');
-        return;
-    }
-
-    showToast('✅ Login successful! Redirecting...', 'success');
-    setTimeout(() => navigateTo('page1'), 1500);
+    const email = emailField.value.trim(); 
+    const password = passwordField.value.trim(); 
+    
+    if (!email || !password) { 
+        showToast('⚠️ Please fill in both fields.', 'warning'); 
+        return; 
+    } 
+    if (!email.includes('@')) { 
+        showToast('⚠️ Please enter a valid email address.', 'warning'); 
+        return; 
+    } 
+    if (password.length < 6) { 
+        showToast('⚠️ Password must be at least 6 characters.', 'warning'); 
+        return; 
+    } 
+    
+    showToast('✅ Login successful! Redirecting...', 'success'); 
+    setTimeout(() => navigateTo('page1'), 1500); 
 });
 
 // Profile Edit Modal Handler
 document.getElementById('editProfileBtn')?.addEventListener('click', function() {
     openModal('✏️ Edit Profile', `
-        <form id="profileEditForm">
-            <div class="form-group mb-3">
-                <label>Full Name</label>
-                <input type="text" id="editName" class="w-full form-control" value="Sanaullah">
-            </div>
-            <div class="form-group mb-3">
-                <label>Email</label>
-                <input type="email" id="editEmail" class="w-full form-control" value="sanaullah@scaleflow.com">
-            </div>
-            <button type="submit" class="btn-primary w-full">Save Changes</button>
+        <form id="profileEditForm"> 
+            <div class="form-group mb-3"> 
+                <label>Full Name</label> 
+                <input type="text" id="editName" class="w-full form-control" value="Sanaullah"> 
+            </div> 
+            <div class="form-group mb-3"> 
+                <label>Email</label> 
+                <input type="email" id="editEmail" class="w-full form-control" value="sanaullah@scaleflow.com"> 
+            </div> 
+            <button type="submit" class="btn-primary w-full">Save Changes</button> 
         </form>
     `);
-    
-    document.getElementById('profileEditForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        showToast('✅ Profile updated!', 'success');
-        closeModal();
-    });
+
+    document.getElementById('profileEditForm')?.addEventListener('submit', function(e) { 
+        e.preventDefault(); 
+        showToast('✅ Profile updated!', 'success'); 
+        closeModal(); 
+    }); 
 });
 
 // ============================================================
@@ -452,16 +460,21 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Startup Error:", error);
     }
 
-    setTimeout(function () {
-        try {
-            hideLoader();
-        } catch (error) {
-            console.error("Loader Error:", error);
-            if (loader) loader.style.display = "none";
-        }
-    }, 300);
+    setTimeout(function () { 
+        try { 
+            hideLoader(); 
+        } catch (error) { 
+            console.error("Loader Error:", error); 
+            if (loader) loader.style.display = "none"; 
+        } 
+    }, 300); 
 
-    console.log("✅ ScaleFlow University JavaScript complete and running!");
-});
+    window.initializeCoursesModule = initializeCoursesModule;
+
+document.addEventListener("DOMContentLoaded", initializeCoursesModule);
+
+Object.freeze(courseDatabase);
+
+console.log("✅ Courses Module LOCKED & Secured");
 
 })(window);
