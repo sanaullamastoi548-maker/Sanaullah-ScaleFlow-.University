@@ -705,4 +705,265 @@ document.addEventListener("click",function(e){
     );
 
 });
+
+    /*============================================================
+Part J — Continue Learning + Recently Viewed Engine
+Version : 1.0
+============================================================*/
+
+let recentlyViewedCourses = [];
+let continueLearningCourse = null;
+
+/*==================================================
+Recently Viewed
+==================================================*/
+
+function addRecentlyViewed(course){
+
+    if(!course) return;
+
+    recentlyViewedCourses =
+        recentlyViewedCourses.filter(c => c.id !== course.id);
+
+    recentlyViewedCourses.unshift(course);
+
+    if(recentlyViewedCourses.length > 6){
+        recentlyViewedCourses.pop();
+    }
+
+    renderRecentlyViewed();
+
+}
+
+/*==================================================
+Continue Learning
+==================================================*/
+
+function setContinueLearning(course){
+
+    continueLearningCourse = course;
+
+    renderContinueLearning();
+
+}
+
+/*==================================================
+Render Recently Viewed
+==================================================*/
+
+function renderRecentlyViewed(){
+
+    const container =
+        document.getElementById("recentCoursesGrid");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    recentlyViewedCourses.forEach(course=>{
+
+        container.innerHTML += `
+        <div class="course-card">
+            <h3>${course.title}</h3>
+            <p>${course.duration}</p>
+            <button class="btn-primary"
+                    data-courseid="${course.id}">
+                Open Again
+            </button>
+        </div>
+        `;
+
+    });
+
+}
+
+/*==================================================
+Render Continue Learning
+==================================================*/
+
+function renderContinueLearning(){
+
+    const container =
+        document.getElementById("continueLearningGrid");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    if(!continueLearningCourse){
+
+        container.innerHTML =
+        "<p>No active learning session.</p>";
+
+        return;
+
+    }
+
+    container.innerHTML = `
+        <div class="course-card">
+
+            <h3>${continueLearningCourse.title}</h3>
+
+            <p>${continueLearningCourse.duration}</p>
+
+            <button class="btn-primary"
+                    id="continueLearningCourseBtn">
+                ▶ Continue
+            </button>
+
+        </div>
+    `;
+
+}
+
+/*==================================================
+Track Course Open
+==================================================*/
+
+const originalOpenCourseDetails = openCourseDetails;
+
+openCourseDetails = function(courseId){
+
+    originalOpenCourseDetails(courseId);
+
+    const course =
+        courseDatabase.find(c=>c.id===courseId);
+
+    if(course){
+
+        addRecentlyViewed(course);
+
+        setContinueLearning(course);
+
+    }
+
+};
+
+/*==================================================
+Continue Button
+==================================================*/
+
+document.addEventListener("click",function(e){
+
+    if(e.target.id !== "continueLearningCourseBtn") return;
+
+    if(!continueLearningCourse){
+
+        showToast("No course available.");
+
+        return;
+
+    }
+
+    showToast(
+        "▶ Continuing: " +
+        continueLearningCourse.title +
+        "\n\nLearning Engine will be connected soon."
+    );
+
+});
  
+
+ /*============================================================
+Part K — AI Recommendations Engine
+Version : 1.0
+============================================================*/
+
+function renderAISuggestions(){
+
+    const aiGrid =
+        document.getElementById("aiSuggestionsGrid");
+
+    if(!aiGrid) return;
+
+    aiGrid.innerHTML = "";
+
+    const suggestions =
+        courseDatabase.filter(c =>
+            c.recommended === true
+        );
+
+    suggestions.forEach(course=>{
+
+        aiGrid.innerHTML += `
+        <div class="course-card">
+
+            <h3>🤖 ${course.title}</h3>
+
+            <p>${course.category}</p>
+
+            <small>
+            AI Recommendation Score:
+            ${Math.floor(Math.random()*15)+85}%
+            </small>
+
+            <button
+                class="btn-primary ai-course-btn"
+                data-courseid="${course.id}">
+                View Course
+            </button>
+
+        </div>
+        `;
+
+    });
+
+}
+
+/*==================================================
+Learning Paths
+==================================================*/
+
+function renderLearningPaths(){
+
+    const container =
+        document.getElementById("recommendedLearningPaths");
+
+    if(!container) return;
+
+    container.innerHTML = `
+
+    <div class="learning-path-card">
+        <h3>💻 Programming Path</h3>
+        <p>HTML → JavaScript → Apps Script</p>
+    </div>
+
+    <div class="learning-path-card">
+        <h3>🤖 AI Path</h3>
+        <p>AI Productivity → Automation</p>
+    </div>
+
+    <div class="learning-path-card">
+        <h3>💼 Business Path</h3>
+        <p>Business → Marketing → Freelancing</p>
+    </div>
+
+    `;
+
+}
+
+/*==================================================
+AI Buttons
+==================================================*/
+
+document.addEventListener("click",function(e){
+
+    if(!e.target.classList.contains("ai-course-btn"))
+        return;
+
+    const id =
+        e.target.dataset.courseid;
+
+    openCourseDetails(id);
+
+});
+
+/*==================================================
+Auto Initialize
+==================================================*/
+
+renderAISuggestions();
+
+renderLearningPaths();
+
+log("AI Recommendation Engine Ready.");
