@@ -438,6 +438,7 @@ document.getElementById('editProfileBtn')?.addEventListener('click', function() 
     }); 
 });
 
+    
 // ============================================================
 // 13. GLOBAL EXPOSE & BOOT STARTUP
 // ============================================================
@@ -469,19 +470,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } 
     }, 300); 
 
-    document.addEventListener("DOMContentLoaded", function () {
-    console.log("🚀 DOM Loaded");
-
-    try {
-        navigateTo("page1");
-        showToast("🎓 Welcome to ScaleFlow University", "success");
-    } catch (error) {
-        console.error(error);
-    }
-
-    setTimeout(function () {
-        hideLoader();
-    }, 300);
+    console.log("✅ ScaleFlow University JavaScript complete and running!"); 
 });
 
 })(window);
