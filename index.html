@@ -271,14 +271,55 @@ PAGE 2: DASHBOARD
 <!-- =====================================================
 PAGE 3 : COURSES
 ===================================================== -->
+  <section id="coursesContainer">
+    <div class="courses-module">
+        <div class="courses-header">
+            <div class="courses-title">
+                <h1>📚 Explore Courses</h1>
+                <p>Learn • Build • Earn • Grow</p>
+            </div>
+        </div>
 
-<section id="page3" class="page-section" style="display: none;">
+        <div class="course-search-area">
+            <input type="text" id="courseSearchInput" placeholder="Search Courses..." autocomplete="off">
+        </div>
 
-    <div id="coursesContainer">
-        <!-- courses.html کا مکمل ماڈیول جاوا اسکرپٹ کے ذریعے یہاں ڈائنامیکاً لوڈ ہوگا -->
+        <div class="course-filter-area">
+            <button class="course-filter active" data-filter="all">All</button>
+            <button class="course-filter" data-filter="programming">Programming</button>
+            <button class="course-filter" data-filter="business">Business</button>
+            <button class="course-filter" data-filter="automation">Automation</button>
+            <button class="course-filter" data-filter="ai">AI</button>
+        </div>
+
+        <div class="featured-courses">
+            <h2>⭐ Featured Courses</h2>
+            <div id="featuredCoursesGrid" class="courses-grid"></div>
+        </div>
+
+        <div class="recommended-courses">
+            <h2>🤖 Recommended For You</h2>
+            <div id="recommendedCoursesGrid" class="courses-grid"></div>
+        </div>
+
+        <section class="all-courses-section">
+            <div class="section-header">
+                <h2>📚 All Available Courses</h2>
+                <p>Browse all available courses.</p>
+            </div>
+            <div id="allCoursesGrid" class="courses-grid"></div>
+        </section>
+
+        <section id="noCoursesFound" class="no-courses" style="display:none;">
+            <div class="empty-state">
+                <h3>📭 No Courses Found</h3>
+                <p>Try another keyword or category.</p>
+            </div>
+        </section>
     </div>
-
 </section>
+
+    
 
 
 <!-- ===================================================
