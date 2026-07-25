@@ -48,9 +48,7 @@ function log(message) {
 }
 
 log("Courses Module Loaded");
-
-})();
-
+    
 /*============================================================
 PART B
 COURSE DATABASE
