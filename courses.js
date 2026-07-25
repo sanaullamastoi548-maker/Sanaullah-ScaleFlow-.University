@@ -935,3 +935,5 @@ function initializeSmartSections(){
 initializeSmartSections();
 
 log("Part K Loaded Successfully");
+
+    })();
