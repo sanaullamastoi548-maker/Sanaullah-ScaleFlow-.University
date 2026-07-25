@@ -1,7 +1,7 @@
 /*============================================================
 ScaleFlow University
-COURSES MODULE - Enterprise Edition (Error-Free & Fully Functional)
-Version : 2.1 Final
+COURSES MODULE - Enterprise Edition (Direct HTML Integration)
+Version : 2.2 Final
 Status  : Stable & Optimized
 ============================================================*/
 
@@ -11,19 +11,16 @@ Status  : Stable & Optimized
 
 const MODULE = Object.freeze({
     NAME: "Courses Module",
-    VERSION: "2.1",
+    VERSION: "2.2",
     AUTHOR: "ScaleFlow University",
     STATUS: "Active"
 });
 
-let currentPage = 1;
-const coursesPerPage = 6;
 let activeFilter = "all";
 let searchKeyword = "";
-let currentCourses = [];
 
 /*============================================================
-COURSE DATABASE (Pre-loaded with sample courses for instant display)
+COURSE DATABASE
 ============================================================*/
 
 const courseDatabase = [
@@ -39,7 +36,6 @@ const courseDatabase = [
         price: "Free",
         featured: true,
         recommended: true,
-        status: "Active",
         image: "https://via.placeholder.com/400x220?text=AI+Fundamentals"
     },
     {
@@ -54,7 +50,6 @@ const courseDatabase = [
         price: "$29.99",
         featured: true,
         recommended: true,
-        status: "Active",
         image: "https://via.placeholder.com/400x220?text=Google+Sheets+Automation"
     },
     {
@@ -69,7 +64,6 @@ const courseDatabase = [
         price: "$49.99",
         featured: false,
         recommended: true,
-        status: "Active",
         image: "https://via.placeholder.com/400x220?text=Web+Development"
     },
     {
@@ -84,7 +78,6 @@ const courseDatabase = [
         price: "Free",
         featured: true,
         recommended: false,
-        status: "Active",
         image: "https://via.placeholder.com/400x220?text=Freelancing+Masterclass"
     }
 ];
@@ -95,93 +88,6 @@ UTILITY FUNCTIONS
 
 function log(message) {
     console.log(`[${MODULE.NAME}] ${message}`);
-}
-
-function error(message) {
-    console.error(`[${MODULE.NAME}] ${message}`);
-}
-
-function warn(message) {
-    console.warn(`[${MODULE.NAME}] ${message}`);
-}
-
-/*============================================================
-DOM REFERENCES
-============================================================*/
-
-let searchInput = null;
-let filterArea = null;
-let featuredArea = null;
-let recommendedArea = null;
-let allCoursesArea = null;
-let paginationArea = null;
-let loadingArea = null;
-let emptyStateArea = null;
-let toastArea = null;
-let detailsModal = null;
-let enrollModal = null;
-
-function loadCourseDOM() {
-    searchInput = document.getElementById("courseSearchInput");
-    filterArea = document.querySelector(".course-filter-area");
-    featuredArea = document.getElementById("featuredCoursesGrid");
-    recommendedArea = document.getElementById("recommendedCoursesGrid");
-    allCoursesArea = document.getElementById("allCoursesGrid");
-    paginationArea = document.getElementById("coursesPagination");
-    loadingArea = document.getElementById("coursesLoading");
-    emptyStateArea = document.getElementById("noCoursesFound");
-    toastArea = document.getElementById("courseToastArea");
-    detailsModal = document.getElementById("courseDetailsModal");
-    enrollModal = document.getElementById("courseEnrollModal");
-    log("DOM References Loaded Successfully");
-}
-
-function validateCourseDOM() {
-    loadCourseDOM();
-    // اگر مین گرڈز موجود ہیں تو ویلیڈیشن پاس ہو جائے گی
-    if (!featuredArea || !allCoursesArea) {
-        warn("Course HTML elements are still loading...");
-        return false;
-    }
-    log("DOM Validation Passed");
-    return true;
-}
-
-/*============================================================
-DATABASE FUNCTIONS
-============================================================*/
-
-function getAllCourses() {
-    return [...courseDatabase];
-}
-
-function getFeaturedCourses() {
-    return courseDatabase.filter(course => course.featured === true);
-}
-
-function getRecommendedCourses() {
-    return courseDatabase.filter(course => course.recommended === true);
-}
-
-function getCoursesByCategory(category) {
-    if (!category || category === "all") {
-        return getAllCourses();
-    }
-    return courseDatabase.filter(course => course.category.toLowerCase() === category.toLowerCase());
-}
-
-function searchAndFilterCourses() {
-    let list = getCoursesByCategory(activeFilter);
-
-    if (searchKeyword && searchKeyword.trim() !== "") {
-        const keyword = searchKeyword.toLowerCase();
-        list = list.filter(course => 
-            course.title.toLowerCase().includes(keyword) ||
-            course.category.toLowerCase().includes(keyword) ||
-            course.instructor.toLowerCase().includes(keyword)
-        );
-    }
-    return list;
 }
 
 /*============================================================
@@ -234,191 +140,122 @@ function renderCards(container, list) {
 }
 
 /*============================================================
-RENDER ENGINES
+FILTER & SEARCH LOGIC
 ============================================================*/
 
-function renderFeaturedCourses() {
-    if (!featuredArea) return;
-    renderCards(featuredArea, getFeaturedCourses());
-}
+function getFilteredCourses() {
+    let list = courseDatabase;
 
-function renderRecommendedCourses() {
-    if (!recommendedArea) return;
-    renderCards(recommendedArea, getRecommendedCourses());
-}
-
-function renderAllCourses() {
-    if (!allCoursesArea) return;
-    const filteredList = searchAndFilterCourses();
-
-    if (filteredList.length === 0) {
-        allCoursesArea.innerHTML = "";
-        if (emptyStateArea) emptyStateArea.style.display = "block";
-        return;
+    // Category Filter
+    if (activeFilter && activeFilter !== "all") {
+        list = list.filter(c => c.category.toLowerCase() === activeFilter.toLowerCase());
     }
 
-    if (emptyStateArea) emptyStateArea.style.display = "none";
-    renderCards(allCoursesArea, filteredList);
-}
+    // Search Keyword Filter
+    if (searchKeyword && searchKeyword.trim() !== "") {
+        const kw = searchKeyword.toLowerCase();
+        list = list.filter(c => 
+            c.title.toLowerCase().includes(kw) ||
+            c.category.toLowerCase().includes(kw) ||
+            c.instructor.toLowerCase().includes(kw)
+        );
+    }
 
-function renderAISuggestions() {
-    const aiGrid = document.getElementById("aiSuggestionsGrid");
-    if (!aiGrid) return;
-    const suggestions = courseDatabase.filter(c => c.recommended === true);
-    aiGrid.innerHTML = suggestions.map(course => `
-        <div class="course-card" data-courseid="${course.id}">
-            <h3>🤖 ${course.title}</h3>
-            <p>${course.category}</p>
-            <small>AI Recommendation Score: 95%</small>
-            <button class="btn-primary ai-course-btn" data-courseid="${course.id}" style="margin-top:10px;">View Course</button>
-        </div>
-    `).join("");
-}
-
-function renderLearningPaths() {
-    const container = document.getElementById("recommendedLearningPaths");
-    if (!container) return;
-    container.innerHTML = `
-        <div class="learning-path-card" style="background:#fff; padding:15px; border-radius:8px; border:1px solid #eee;">
-            <h3>💻 Programming Path</h3>
-            <p>HTML → JavaScript → Apps Script</p>
-        </div>
-        <div class="learning-path-card" style="background:#fff; padding:15px; border-radius:8px; border:1px solid #eee;">
-            <h3>🤖 AI Path</h3>
-            <p>AI Productivity → Automation</p>
-        </div>
-        <div class="learning-path-card" style="background:#fff; padding:15px; border-radius:8px; border:1px solid #eee;">
-            <h3>💼 Business Path</h3>
-            <p>Business → Marketing → Freelancing</p>
-        </div>
-    `;
+    return list;
 }
 
 /*============================================================
-INITIALIZATION & EVENT LISTENERS
+MAIN RENDER ENGINE
 ============================================================*/
 
-function initializeCoursesModule() {
-    log("Initializing Courses Module...");
-    
-    // ڈوم لوڈ ہونے کا انتظار کریں تاکہ کنٹینرز مل جائیں
-    if (!validateCourseDOM()) {
-        setTimeout(initializeCoursesModule, 200);
-        return;
+function renderAllSections() {
+    const featuredGrid = document.getElementById("featuredCoursesGrid");
+    const recommendedGrid = document.getElementById("recommendedCoursesGrid");
+    const allCoursesGrid = document.getElementById("allCoursesGrid");
+    const noCoursesFound = document.getElementById("noCoursesFound");
+
+    // 1. Featured Courses (Only featured = true)
+    if (featuredGrid) {
+        const featuredList = courseDatabase.filter(c => c.featured);
+        renderCards(featuredGrid, featuredList);
     }
 
-    if (loadingArea) loadingArea.style.display = "block";
+    // 2. Recommended Courses (Only recommended = true)
+    if (recommendedGrid) {
+        const recommendedList = courseDatabase.filter(c => c.recommended);
+        renderCards(recommendedGrid, recommendedList);
+    }
 
-    setTimeout(() => {
-        if (loadingArea) loadingArea.style.display = "none";
+    // 3. All Courses / Filtered / Searched Courses
+    if (allCoursesGrid) {
+        const filteredList = getFilteredCourses();
+        if (filteredList.length === 0) {
+            allCoursesGrid.innerHTML = "";
+            if (noCoursesFound) noCoursesFound.style.display = "block";
+        } else {
+            if (noCoursesFound) noCoursesFound.style.display = "none";
+            renderCards(allCoursesGrid, filteredList);
+        }
+    }
 
-        renderFeaturedCourses();
-        renderRecommendedCourses();
-        renderAllCourses();
-        renderAISuggestions();
-        renderLearningPaths();
-
-        attachSearchEngine();
-        attachFilterEngine();
-
-        log("Courses Module Initialized Successfully.");
-    }, 200);
+    log("All sections rendered successfully.");
 }
 
-function attachSearchEngine() {
-    if (!searchInput) {
-        searchInput = document.getElementById("courseSearchInput");
-    }
+/*============================================================
+EVENT LISTENERS & BINDINGS
+============================================================*/
+
+function initCourseEvents() {
+    // Search Input Listener
+    const searchInput = document.getElementById("courseSearchInput");
     if (searchInput) {
         searchInput.addEventListener("input", function() {
             searchKeyword = this.value;
-            renderAllCourses();
+            renderAllSections();
         });
     }
-}
 
-function attachFilterEngine() {
-    const filters = document.querySelectorAll(".course-filter");
-    filters.forEach(btn => {
+    // Filter Buttons Listener
+    const filterButtons = document.querySelectorAll(".course-filter");
+    filterButtons.forEach(btn => {
         btn.addEventListener("click", function() {
-            filters.forEach(x => x.classList.remove("active"));
+            filterButtons.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
             activeFilter = this.dataset.filter || "all";
-            renderAllCourses();
+            renderAllSections();
         });
+    });
+
+    // Click on Card or Start Learning Button
+    document.addEventListener("click", function(e) {
+        const card = e.target.closest(".course-card");
+        if (card && card.dataset.courseid) {
+            const courseId = card.dataset.courseid;
+            const course = courseDatabase.find(c => c.id === courseId);
+            if (course) {
+                // آپ یہاں کورس ڈیٹیل یا انرولمنٹ کا فنکشن چلا سکتے ہیں
+                log(`Clicked on course: ${course.title}`);
+            }
+        }
     });
 }
 
 /*============================================================
-MODALS & INTERACTIONS
-============================================================*/
-
-function openCourseDetails(courseId) {
-    const course = courseDatabase.find(c => c.id === courseId);
-    if (!course) return;
-
-    const modal = document.getElementById("courseDetailsModal");
-    const content = document.getElementById("courseDetailsContent");
-    if (!modal || !content) return;
-
-    content.innerHTML = `
-        <div class="course-details-card">
-            <h2>${course.title}</h2>
-            <p><strong>Instructor:</strong> ${course.instructor}</p>
-            <p><strong>Category:</strong> ${course.category}</p>
-            <p><strong>Difficulty:</strong> ${course.difficulty}</p>
-            <p><strong>Duration:</strong> ${course.duration}</p>
-            <p><strong>Lessons:</strong> ${course.lessons}</p>
-            <p><strong>Rating:</strong> ⭐ ${course.rating}</p>
-            <p><strong>Price:</strong> ${course.price}</p>
-            <div style="margin-top:20px;">
-                <button id="modalEnrollBtn" class="btn-primary" data-courseid="${course.id}">
-                    🎓 Enroll Now
-                </button>
-            </div>
-        </div>
-    `;
-    modal.style.display = "flex";
-}
-
-document.addEventListener("click", function(e) {
-    const card = e.target.closest(".course-card");
-    if (card && card.dataset.courseid) {
-        openCourseDetails(card.dataset.courseid);
-    }
-
-    if (e.target.id === "closeCourseModal" || e.target.classList.contains("modal-close")) {
-        const modal = document.getElementById("courseDetailsModal");
-        if (modal) modal.style.display = "none";
-    }
-
-    if (e.target.id === "modalEnrollBtn") {
-        alert("🎓 Enrollment feature is active! Course successfully joined.");
-        const modal = document.getElementById("courseDetailsModal");
-        if (modal) modal.style.display = "none";
-    }
-});
-
-/*============================================================
-AUTO START ON LOAD & NAVIGATION CLICK
+INITIALIZATION ON LOAD & NAVIGATION
 ============================================================*/
 
 document.addEventListener("DOMContentLoaded", function() {
-    initializeCoursesModule();
+    renderAllSections();
+    initCourseEvents();
 });
 
+// اگر سائیڈ بار یا پیج 3 پر کلک کرنے سے کورسز دوبارہ لوڈ کروانے ہوں
 const navCourses = document.getElementById("navPage3");
 if (navCourses) {
     navCourses.addEventListener("click", function(e) {
-        e.preventDefault();
-        document.querySelectorAll(".page-section").forEach(sec => sec.style.display = "none");
-        const page3 = document.getElementById("page3");
-        if (page3) page3.style.display = "block";
-        
-        document.querySelectorAll(".sidebar-menu a").forEach(l => l.classList.remove("active"));
-        this.classList.add("active");
-
-        initializeCoursesModule();
+        setTimeout(() => {
+            renderAllSections();
+        }, 50);
     });
 }
 
